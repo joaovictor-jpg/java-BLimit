@@ -34,5 +34,15 @@ public class Main {
         repository.atualizarUsuario(joao.getId(), novosDadosJoao);
 
         repository.listaUsuarios();
+
+        var usuarioOptional = repository.login("joaovictor123456@gmail.com", "123");
+
+        System.out.println("Login de usuário:");
+
+        if (usuarioOptional.isPresent()) {
+            System.out.println(usuarioOptional.get());
+        } else {
+            System.out.println("Email ou senha incorreta.");
+        }
     }
 }
