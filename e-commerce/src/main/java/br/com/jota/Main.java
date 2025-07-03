@@ -2,6 +2,7 @@ package br.com.jota;
 
 import br.com.jota.entidade.Endereco;
 import br.com.jota.entidade.Usuario;
+import br.com.jota.repositorio.UsuarioRepository;
 
 import static br.com.jota.entidade.enums.Tipo.USUARIO;
 
@@ -11,28 +12,8 @@ public class Main {
                 "123456", new Endereco("21240470", "Rio de Janeiro", "Rio de Janeiro",
                 "Cristiano Machado", "661", "apt - 201"), USUARIO);
 
-        System.out.println(joao);
+        UsuarioRepository repository = new UsuarioRepository();
 
-        joao.alterarSenha("987654");
-
-        System.out.println(joao);
-
-        try {
-            Usuario pedro = new Usuario("pedro", "pedro@gmail.com",
-                    "12345", new Endereco("21240470", "Rio de Janeiro", "Rio de Janeiro",
-                    "Cristiano Machado", "661", "apt - 201"), USUARIO);
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-        }
-
-        Usuario pedro = new Usuario("Pedro", "pedro@gmail.com",
-                "123456", new Endereco("21240470", "Rio de Janeiro", "Rio de Janeiro",
-                "Cristiano Machado", "661", "apt - 201"), USUARIO);
-
-        System.out.println(pedro);
-
-        pedro.alterarSenha("98765");
-
-        System.out.println(pedro);
+        repository.cadastrarUsuario(joao);
     }
 }
