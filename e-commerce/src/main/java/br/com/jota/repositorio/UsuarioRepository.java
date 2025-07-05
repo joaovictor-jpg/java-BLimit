@@ -27,6 +27,10 @@ public class UsuarioRepository {
         atualizarLista(velhoUsuario);
     }
 
+    public void deletarUsuario(UUID idUsuario) {
+        this.usuarios.removeIf(u -> u.getId().equals(idUsuario));
+    }
+
     public void listaUsuarios() {
         System.out.println("Lista de usuário");
         usuarios.forEach(System.out::println);
