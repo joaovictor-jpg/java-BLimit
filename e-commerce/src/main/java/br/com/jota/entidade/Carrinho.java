@@ -27,10 +27,15 @@ public class Carrinho {
         produtos.clear();
     }
 
-    public void finalizarCompra() {
+    public BigDecimal calcularValorTotal() {
         BigDecimal valorTotal = produtos.stream()
                 .map(Produto::getPreco)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
+        return valorTotal;
+    }
+
+    public void finalizarCompra() {
+        BigDecimal valorTotal = calcularValorTotal();
         System.out.println("Boa noite, " + this.usuario.getNome());
         System.out.println("Esses são todos os seus produtos: ");
         produtos.forEach(System.out::println);

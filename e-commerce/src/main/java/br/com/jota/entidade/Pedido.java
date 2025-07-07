@@ -2,6 +2,7 @@ package br.com.jota.entidade;
 
 import br.com.jota.entidade.enums.StatusPedido;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -37,8 +38,16 @@ public class Pedido {
         produtos.add(produto);
     }
 
+    public void removeProduto(UUID idProduto) {
+        produtos.removeIf(p -> Objects.equals(p.getId(), idProduto));
+    }
+
     public Carrinho getCarrinho() {
         return carrinho;
+    }
+
+    public void removerProdutoDoCarrinho(UUID idProduto) {
+        carrinho.deletarProduto(idProduto);
     }
 
     public void adicionarCarrinho(Carrinho carrinho) {
@@ -51,6 +60,18 @@ public class Pedido {
 
     public void setStatus(StatusPedido status) {
         this.status = status;
+    }
+
+    public BigDecimal CalcularTotal() {
+        BigDecimal total = (carrinho != null) ? carrinho.calcularValorTotal() : BigDecimal.ZERO;
+        if (produtos != null) {
+            BigDecimal valorProdutos = produtos.stream()
+                    .map(Produto::getPreco)
+                    .reduce(BigDecimal.ZERO, BigDecimal::add);
+
+            total = total.add(valorProdutos);
+        }
+        return total;
     }
 
     @Override

@@ -10,8 +10,8 @@ public class Produto {
     private String nome;
     private Integer estoque;
 
-    public Produto(UUID id, BigDecimal preco, String nome, Integer estoque) {
-        this.id = id;
+    public Produto(BigDecimal preco, String nome, Integer estoque) {
+        this.id = UUID.randomUUID();
         this.naoPodeSerUmValorNegativo(preco);
         this.preco = preco;
         this.naoPodePossuirQuantidadeNegativaDeProduto(estoque);
